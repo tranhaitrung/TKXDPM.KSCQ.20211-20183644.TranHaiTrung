@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DeliveryForm">
+   <children>
+       <Pane prefHeight="65.0" prefWidth="1366.0" style="-fx-background-color: #FFFFFF" />
+       <ImageView fitHeight="65.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+           <image>
+               <Image url="@../../../../../Pictures/PTvaXDPM/shop-book-logo-icon-design-vector-22504896%20(2).jpg" />
+           </image>
+       </ImageView>
+       <Label layoutX="76.0" layoutY="14.0" text="SHIPPING" textFill="#0c6aef">
+           <font>
+               <Font name="Segoe Print Bold" size="25.0" />
+           </font>
+       </Label>
+      <Pane layoutY="127.0" prefHeight="578.0" prefWidth="1366.0" style="-fx-border-width: 0.5; -fx-border-color: #0c6aef; -fx-background-color: #ffffff">
+         <children>
+            <Label layoutX="207.0" layoutY="56.0" text="Name">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="207.0" layoutY="177.0" text="Province/City">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="207.0" layoutY="248.0" text="Address">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="207.0" layoutY="349.0" text="Shipping Instructions">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ComboBox layoutX="400.0" layoutY="173.0" prefHeight="35.0" prefWidth="200.0" />
+            <Label layoutX="207.0" layoutY="118.0" text="Phone">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField layoutX="400.0" layoutY="52.0" prefHeight="35.0" prefWidth="600.0" />
+            <TextField layoutX="400.0" layoutY="114.0" prefHeight="35.0" prefWidth="600.0" />
+            <TextField layoutX="400.0" layoutY="239.0" prefHeight="45.0" prefWidth="600.0" />
+            <TextArea layoutX="400.0" layoutY="319.0" prefHeight="115.0" prefWidth="600.0" />
+            <Button layoutX="510.0" layoutY="489.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="380.0" style="-fx-background-color: #cf0303" text="CONFIRM DELIVERY" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+         </children></Pane>
+   </children>
+</AnchorPane>

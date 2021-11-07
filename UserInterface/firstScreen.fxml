@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FirstScreen">
+   <children>
+      <ImageView fitHeight="545.0" fitWidth="762.0" layoutX="339.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Pictures/SavedPictures/bookshop.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="601.0" layoutY="464.0" prefHeight="91.0" prefWidth="164.0" text="AIMS" textAlignment="CENTER" textFill="#385db2">
+         <font>
+            <Font name="Bookshelf Symbol 7" size="70.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

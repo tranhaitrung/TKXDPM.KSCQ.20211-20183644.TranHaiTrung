@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import entity.cart.Cart;
+import entity.cart.CartMedia;
 import utils.Configs;
 
 public class Order {
@@ -29,7 +31,8 @@ public class Order {
     }
 
     public List getlstOrderMedia() {
-        return this.lstOrderMedia;
+        List listOrderMedia = lstOrderMedia;
+        return listOrderMedia;
     }
 
     public void setlstOrderMedia(List lstOrderMedia) {
@@ -59,6 +62,18 @@ public class Order {
             amount += om.getPrice();
         }
         return (int) (amount + (Configs.PERCENT_VAT/100)*amount);
+    }
+
+    public Order createdOrder() {
+        Order order = new Order();
+        for (Object object : Cart.getCart().getListMedia()) {
+            CartMedia cartMedia = (CartMedia) object;
+            OrderMedia orderMedia = new OrderMedia(cartMedia.getMedia(),
+                    cartMedia.getQuantity(),
+                    cartMedia.getPrice());
+            order.addOrderMedia(orderMedia);
+        }
+        return order;
     }
 
 }

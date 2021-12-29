@@ -10,7 +10,7 @@ import common.exception.NotEnoughBalanceException;
 import common.exception.NotEnoughTransactionInfoException;
 import common.exception.SuspiciousTransactionException;
 import common.exception.UnrecognizedException;
-import entity.payment.CreditCard;
+import entity.payment.cardIpl.CreditCard;
 import entity.payment.PaymentTransaction;
 import utils.Configs;
 import utils.MyMap;
@@ -28,10 +28,7 @@ public class InterbankSubsystemController {
 	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
 		return null;
 	}
-	
-	private String generateData(Map<String, Object> data) {
-		return ((MyMap) data).toJSON();
-	}
+
 
 	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
 		Map<String, Object> transaction = new MyMap();
@@ -51,7 +48,7 @@ public class InterbankSubsystemController {
 		requestMap.put("version", VERSION);
 		requestMap.put("transaction", transaction);
 
-		String responseText = interbankBoundary.query(Configs.PROCESS_TRANSACTION_URL, generateData(requestMap));
+		String responseText = interbankBoundary.query(Configs.PROCESS_TRANSACTION_URL, new ConvertData().convertMapToJson(requestMap));
 		MyMap response = null;
 		try {
 			response = MyMap.toMyMap(responseText, 0);

@@ -1,8 +1,8 @@
-package entity.payment;
+package entity.payment.cardIpl;
 
-import java.sql.Timestamp;
+import entity.payment.PaymentCard;
 
-public class CreditCard {
+public class CreditCard implements PaymentCard {
 	private String cardCode;
 	private String owner;
 	private int cvvCode;

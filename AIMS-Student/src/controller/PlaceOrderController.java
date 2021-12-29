@@ -9,6 +9,12 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import controller.calculate.NormalShippingFee;
+import controller.calculate.ShippingFeeCalculator;
+import controller.validate.ValidateInterface;
+import controller.validate.validateIpm.ValidateAddress;
+import controller.validate.validateIpm.ValidateName;
+import controller.validate.validateIpm.ValidatePhone;
 import org.junit.platform.commons.util.StringUtils;
 
 import entity.cart.Cart;
@@ -44,15 +50,7 @@ public class PlaceOrderController extends BaseController{
      * @throws SQLException
      */
     public Order createOrder() throws SQLException{
-        Order order = new Order();
-        for (Object object : Cart.getCart().getListMedia()) {
-            CartMedia cartMedia = (CartMedia) object;
-            OrderMedia orderMedia = new OrderMedia(cartMedia.getMedia(), 
-                                                   cartMedia.getQuantity(), 
-                                                   cartMedia.getPrice());    
-            order.getlstOrderMedia().add(orderMedia);
-        }
-        return order;
+        return new Order().createdOrder();
     }
 
     /**
@@ -105,70 +103,29 @@ public class PlaceOrderController extends BaseController{
     }
     
     public boolean validatePhoneNumber(String phoneNumber) {
-    	if (phoneNumber.length() != 10) return false;
-    	
-    	if(!phoneNumber.startsWith("0")) return false;
-    	
-    	Pattern letter = Pattern.compile("[a-zA-z]");
-    	Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
-    	Matcher hasLetter = letter.matcher(phoneNumber);
-    	Matcher hasSpecial = special.matcher(phoneNumber);
-    	
-    	if (hasLetter.find() || hasSpecial.find()) return false;
-    	
-    	try {
-			Integer.parseInt(phoneNumber);
-		} catch (Exception e) {
-			// TODO: handle exception
-			return false;
-		}
-    	return true;
+        ValidateInterface validatePhone = new ValidatePhone();
+        return validatePhone.validateString(phoneNumber);
     }
     
     public boolean validateName(String name) {
     	// TODO: your work
-    	if (StringUtils.isBlank(name)) return false;
-    	
-    	//Pattern letter = Pattern.compile("[a-zA-z]");
-        Pattern digit = Pattern.compile("[0-9]");
-        Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
-        //Pattern eight = Pattern.compile (".{8}");
-
-
-        //Matcher hasLetter = letter.matcher(name);
-        Matcher hasDigit = digit.matcher(name);
-        Matcher hasSpecial = special.matcher(name);
-
-        if (hasDigit.find() || hasSpecial.find()) {
-        	return false;
-        }
-    	
-    	return true;
+        ValidateInterface validateName = new ValidateName();
+        return validateName.validateString(name);
     }
     
     public boolean validateAddress(String address) {
-    	// TODO: your work
-    	if (StringUtils.isBlank(address)) return false;
-    	
-    	Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]///~]");
-    	
-    	Matcher hasSpecial = special.matcher(address);
-    	
-    	if (hasSpecial.find()) return false; 
-    	
-    	return true;
+        ValidateInterface validateAddress = new ValidateAddress();
+        return validateAddress.validateString(address);
     }
     
 
     /**
      * This method calculates the shipping fees of order
-     * @param order
+     * @param amount
      * @return shippingFee
      */
-    public int calculateShippingFee(Order order){
-        Random rand = new Random();
-        int fees = (int)( ( (rand.nextFloat()*10)/100 ) * order.getAmount() );
-        LOGGER.info("Order Amount: " + order.getAmount() + " -- Shipping Fees: " + fees);
-        return fees;
+    public int calculateShippingFee(int amount){
+        ShippingFeeCalculator shippingFeeCalculator = new NormalShippingFee();
+        return shippingFeeCalculator.calculateShippingFee(amount);
     }
 }

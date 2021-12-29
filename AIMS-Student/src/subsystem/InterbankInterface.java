@@ -2,7 +2,7 @@ package subsystem;
 
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
-import entity.payment.CreditCard;
+import entity.payment.cardIpl.CreditCard;
 import entity.payment.PaymentTransaction;
 
 /**
@@ -12,11 +12,11 @@ import entity.payment.PaymentTransaction;
  * @author hieud
  * 
  */
-public interface InterbankInterface {
+public interface InterbankInterface extends BankInterface {
 
 	/**
 	 * Pay order, and then return the payment transaction
-	 * 
+	 *
 	 * @param card     - the credit card used for payment
 	 * @param amount   - the amount to pay
 	 * @param contents - the transaction contents
@@ -31,7 +31,7 @@ public interface InterbankInterface {
 
 	/**
 	 * Refund, and then return the payment transaction
-	 * 
+	 *
 	 * @param card     - the credit card which would be refunded to
 	 * @param amount   - the amount to refund
 	 * @param contents - the transaction contents

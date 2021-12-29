@@ -114,7 +114,7 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 				return;
 			}
 			
-			int shippingFees = getBController().calculateShippingFee(order);
+			int shippingFees = getBController().calculateShippingFee(order.getAmount());
 			order.setShippingFees(shippingFees);
 			order.setDeliveryInfo(messages);
 			
@@ -133,7 +133,7 @@ public class ShippingScreenHandler extends BaseScreenHandler implements Initiali
 			System.out.println("Giao hàng thường");
 			
 			// calculate shipping fees
-			int shippingFees = getBController().calculateShippingFee(order);
+			int shippingFees = getBController().calculateShippingFee(order.getAmount());
 			order.setShippingFees(shippingFees);
 			order.setDeliveryInfo(messages);
 			

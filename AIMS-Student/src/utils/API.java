@@ -2,7 +2,6 @@ package utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -16,9 +15,6 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Logger;
-
-import entity.payment.CreditCard;
-import entity.payment.PaymentTransaction;
 
 /**
  * Class cung cấp các phương thức gửi request lên server và nhân dữ liệu trả về
@@ -130,13 +126,21 @@ public class API {
 	 */
 	private static String readResponse(HttpURLConnection conn) throws Exception {
 		//Phần 2: đọc dữ liệu trả về từ server
-		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		BufferedReader in;
 		String inputLine;
+		if (conn.getResponseCode() / 100 == 2) {
+			in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		} else {
+			in = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+		}
 		StringBuilder respone = new StringBuilder(); // ising StringBuilder for the sake of memory and performance
-		while ((inputLine = in.readLine()) != null)
+		while ((inputLine = in.readLine()) != null){
+			respone.append(inputLine + "\n");
 			System.out.println(inputLine);
-		respone.append(inputLine + "\n");
+
+		}
 		in.close();
+		LOGGER.info("Respone: " + respone.toString());
 		LOGGER.info("Respone Info: " + respone.substring(0, respone.length() - 1).toString());
 		return respone.substring(0, respone.length() - 1).toString();
 	}
